@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Article Renderer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .article-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 40px;
+            color: white;
+            text-align: center;
+        }
+        
+        .article-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .article-subtitle {
+            font-size: 1.2em;
+            font-style: italic;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        .article-content {
+            padding: 40px;
+        }
+        
+        section {
+            margin-bottom: 40px;
+        }
+        
+        section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        p:not(.title) {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        strong {
+            color: #764ba2;
+            font-weight: 600;
+        }
+        
+        .metadata {
+            padding: 20px 40px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .metadata-item {
+            margin-bottom: 15px;
+        }
+        
+        .metadata-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-right: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-right: 8px;
+            margin-bottom: 5px;
+        }
+        
+        .score-badge {
+            display: inline-block;
+            background: #764ba2;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        
+        .json-input {
+            width: 100%;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            resize: vertical;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .error {
+            background: #fee;
+            color: #c33;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .category-mapping {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="json-input">
+        <h2 style="margin-bottom: 20px; color: #667eea;">Incolla il tuo JSON qui:</h2>
+        <textarea id="jsonInput" placeholder='Incolla qui il JSON con i campi: title, subtitle, summary, products, brands, keywords'></textarea>
+        <button onclick="renderArticle()">Renderizza Articolo</button>
+        <div id="error"></div>
+    </div>
+    
+    <div class="container" id="article" style="display: none;">
+        <div class="article-header">
+            <h1 class="article-title" id="title"></h1>
+            <p class="article-subtitle" id="subtitle"></p>
+        </div>
+        
+        <div class="article-content" id="content"></div>
+        
+        <div class="metadata">
+            <div class="metadata-item" id="brandsSection"></div>
+            <div class="metadata-item" id="productsSection"></div>
+            <div class="metadata-item" id="keywordsSection"></div>
+        </div>
+    </div>
+
+    <script>
+        const categoryMapping = {
+            "467": "Film/Cinema",
+            "481": "Musica",
+            "706": "Televisione",
+            "581": "Cultura Popolare/Celebrità",
+            "733": "Videogiochi"
+        };
+
+        function renderArticle() {
+            const errorDiv = document.getElementById('error');
+            const articleDiv = document.getElementById('article');
+            errorDiv.innerHTML = '';
+            
+            try {
+                const jsonText = document.getElementById('jsonInput').value;
+                const data = JSON.parse(jsonText);
+                
+                // Validate required fields
+                if (!data.title || !data.subtitle || !data.summary) {
+                    throw new Error('Campi obbligatori mancanti: title, subtitle, summary');
+                }
+                
+                // Render title and subtitle
+                document.getElementById('title').textContent = data.title;
+                document.getElementById('subtitle').textContent = data.subtitle;
+                
+                // Render summary (HTML content)
+                document.getElementById('content').innerHTML = data.summary;
+                
+                // Render brands
+                const brandsSection = document.getElementById('brandsSection');
+                if (data.brands && data.brands.length > 0) {
+                    brandsSection.innerHTML = '<span class="metadata-label">Brands:</span>' + 
+                        data.brands.map(b => `<span class="tag">${b}</span>`).join('');
+                } else {
+                    brandsSection.innerHTML = '<span class="metadata-label">Brands:</span><span style="color: #999;">Nessuno</span>';
+                }
+                
+                // Render products
+                const productsSection = document.getElementById('productsSection');
+                if (data.products && data.products.length > 0) {
+                    productsSection.innerHTML = '<span class="metadata-label">Products:</span>' + 
+                        data.products.map(p => `<span class="tag">${p}</span>`).join('');
+                } else {
+                    productsSection.innerHTML = '<span class="metadata-label">Products:</span><span style="color: #999;">Nessuno</span>';
+                }
+                
+                // Render keywords with scores
+                const keywordsSection = document.getElementById('keywordsSection');
+                if (data.keywords && Object.keys(data.keywords).length > 0) {
+                    const sortedKeywords = Object.entries(data.keywords)
+                        .sort((a, b) => b[1] - a[1]); // Sort by score descending
+                    
+                    keywordsSection.innerHTML = '<span class="metadata-label">Keywords:</span><br>' + 
+                        sortedKeywords.map(([id, score]) => {
+                            const categoryName = categoryMapping[id] || `Category ${id}`;
+                            return `<span class="tag">${categoryName}<span class="score-badge">${score}</span></span>`;
+                        }).join('');
+                } else {
+                    keywordsSection.innerHTML = '<span class="metadata-label">Keywords:</span><span style="color: #999;">Nessuno</span>';
+                }
+                
+                articleDiv.style.display = 'block';
+                articleDiv.scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (e) {
+                errorDiv.innerHTML = `<div class="error"><strong>Errore:</strong> ${e.message}</div>`;
+                articleDiv.style.display = 'none';
+            }
+        }
+
+        // Pre-fill with sample data
+        const sampleData = {
+            "title": "Il 2026 sarà l'anno dei matrimoni vip: da Taylor Swift a Zendaya, tutti gli sì più attesi",
+            "subtitle": "Dopo un 2025 di rotture eccellenti, il prossimo anno si preannuncia ricco di promesse eterne tra le celebrità, con proposte spettacolari e diamanti da capogiro",
+            "summary": "<section><p class=\"title\">Le coppie più seguite della cultura pop pronte a convolare a nozze</p><p>Il 2026 si prospetta come un anno memorabile per i matrimoni delle celebrità, con annunci di fidanzamento che si sono moltiplicati negli ultimi mesi. Tra le unioni più attese spicca quella di <strong>Taylor Swift</strong> e <strong>Travis Kelce</strong>, coppia diventata un vero fenomeno della cultura pop. La cantante aveva annunciato la proposta la scorsa estate con il suo inconfondibile tocco ironico sui social, mostrando il momento in cui il campione di football si inginocchiava davanti a lei circondato da fiori. Secondo indiscrezioni, la data cerchiata in rosso sarebbe il 13 giugno 2026, con una cerimonia da sogno in riva all'oceano nel Rhode Island.</p></section><section><p class=\"title\">Dai campioni dello sport alle storie italiane più romantiche</p><p>Dopo nove anni insieme e una proposta diventata virale, <strong>Cristiano Ronaldo</strong> e <strong>Georgina Rodriguez</strong> sono pronti a suggellare il loro amore con un matrimonio che promette lusso, emozione e una grande celebrazione familiare. Tra le storie italiane più romantiche spicca quella di <strong>Aurora Ramazzotti</strong> e <strong>Goffredo Cerza</strong>: la proposta è arrivata nel cuore di Londra, e le nozze sono fissate per il 4 luglio 2026.</p></section>",
+            "products": [],
+            "brands": ["Jessica McCormack"],
+            "keywords": {
+                "467": 15,
+                "481": 75,
+                "706": 25,
+                "581": 95,
+                "733": 5
+            }
+        };
+
+        document.getElementById('jsonInput').value = JSON.stringify(sampleData, null, 2);
+    </script>
+</body>
+</html>

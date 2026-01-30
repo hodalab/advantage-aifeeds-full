@@ -1,0 +1,335 @@
+# template.yaml
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: BAI generic API - /ai/{service}/{version?}
+
+Parameters:
+  Stage:
+    Type: String
+    Default: prod
+    AllowedValues: [dev, test, prod]
+
+  LogRetentionInDays:
+    Type: Number
+    Default: 14
+
+  LambdaTimeout:
+    Type: Number
+    Default: 900
+
+  LambdaMemorySize:
+    Type: Number
+    Default: 512
+
+  S3Destination:
+    Type: String
+    Description: S3 destination for saving new feeds (bucket or bucket/path)
+
+
+
+  owner:
+    Type: String
+  env:
+    Type: String
+    AllowedValues: [dev, test, prod]
+  prefix:
+    Type: String
+  application:
+    Type: String
+  component:
+    Type: String
+  version:
+    Type: String
+
+
+
+Globals:
+  Function:
+    Runtime: python3.14
+    CodeUri: src
+    Timeout: !Ref LambdaTimeout
+    MemorySize: !Ref LambdaMemorySize
+    Tags:
+      owner: !Ref owner
+      env: !Ref env
+      prefix: !Ref prefix
+      application: !Ref application
+      component: !Ref component
+      version: !Ref version
+
+Resources:
+  ApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: !Sub "${AWS::StackName}-ApiGateway"
+      StageName: !Ref Stage
+      EndpointConfiguration: REGIONAL
+      Tags:
+        owner: !Ref owner
+        env: !Ref env
+        prefix: !Ref prefix
+        application: !Ref application
+        component: !Ref component
+        version: !Ref version
+
+  AIFeedsSecrets:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: !Sub "${AWS::StackName}-secrets"
+      Description: API Keys for News Search Service
+
+      Tags:
+        - Key: Stage
+          Value: !Ref Stage
+        - Key: Environment
+          Value: !Ref env
+        - Key: Service
+          Value: ai
+
+  AIFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${AWS::StackName}-AIFunction"
+      RetentionInDays: !Ref LogRetentionInDays
+      Tags:
+        - Key: Stage
+          Value: !Ref Stage
+        - Key: Environment
+          Value: !Ref env
+        - Key: Service
+          Value: ai
+
+
+  AIFunction:
+    Type: AWS::Serverless::Function
+    DependsOn:
+      - AIFunctionLogGroup
+    Properties:
+      FunctionName: !Sub "${AWS::StackName}-AIFunction"
+      Handler: app.handler
+      Description: Generic AI service dispatcher
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - bedrock:*
+              Resource: "*"
+      Events:
+        AiService:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGateway
+            Path: /ai/{service}
+            Method: ANY          
+        AiServiceVersion:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGateway
+            Path: /ai/{service}/{version}
+            Method: ANY
+
+
+  FeedSummaryFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${AWS::StackName}-FeedSummaryFunction"
+      RetentionInDays: !Ref LogRetentionInDays
+      Tags:
+        - Key: Stage
+          Value: !Ref Stage
+        - Key: Environment
+          Value: !Ref env
+        - Key: Service
+          Value: ai
+
+
+  FeedSummaryFunction:
+    Type: AWS::Serverless::Function
+    DependsOn:
+      - FeedSummaryFunctionLogGroup
+    Properties:
+      FunctionName: !Sub "${AWS::StackName}-FeedSummaryFunction"
+      Handler: feed_summary.handler
+      Description: Feed Summary
+      Environment:
+        Variables:
+          SECRET_NAME: !Sub "${AWS::StackName}-secrets"
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - secretsmanager:GetSecretValue
+              Resource: !Sub "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:${AWS::StackName}-secrets-*"
+        - Statement:
+            - Effect: Allow
+              Action:
+                - bedrock:*
+              Resource: "*"
+      Events:
+        AiService:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGateway
+            Path: /feedsummary
+            Method: POST
+
+
+  NewsSearchFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${AWS::StackName}-NewsSearchFunction"
+      RetentionInDays: !Ref LogRetentionInDays
+      Tags:
+        - Key: Stage
+          Value: !Ref Stage
+        - Key: Environment
+          Value: !Ref env
+        - Key: Service
+          Value: ai
+
+
+  NewsSearchFunction:
+    Type: AWS::Serverless::Function
+    DependsOn:
+      - NewsSearchFunctionLogGroup
+    Properties:
+      FunctionName: !Sub "${AWS::StackName}-NewsSearchFunction"
+      Handler: news_search_lambda.handler
+      Description: News Search Service
+      Environment:
+        Variables:
+          SECRET_NAME: !Sub "${AWS::StackName}-secrets"
+          FEED_SUMMARY_FUNCTION: !Ref FeedSummaryFunction
+          S3_DESTINATION: !Sub "s3://${S3Destination}"
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - secretsmanager:GetSecretValue
+              Resource: !Sub "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:${AWS::StackName}-secrets-*"
+        - Statement:
+            - Effect: Allow
+              Action:
+                - bedrock:*
+              Resource: "*"
+        - Statement:
+            - Effect: Allow
+              Action:
+                - lambda:InvokeFunction
+              Resource: !GetAtt FeedSummaryFunction.Arn
+        - Statement:
+            - Effect: Allow
+              Action:
+                - s3:PutObject
+              Resource: !Sub "arn:aws:s3:::${S3Destination}/*"
+      Events:
+        NewsSearchService:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGateway
+            Path: /newsfeeds
+            Method: POST          
+  
+
+
+
+
+  NewsSearchSchedulerLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${AWS::StackName}-NewsSearchScheduler"
+      RetentionInDays: 14
+
+  NewsSearchSchedulerFunction:
+    Type: AWS::Serverless::Function
+    DependsOn:
+      - NewsSearchSchedulerLogGroup
+    Properties:
+      FunctionName: !Sub "${AWS::StackName}-NewsSearchScheduler"
+      Handler: scheduler_lambda.handler
+      Timeout: 60
+      Description: Fan-out scheduler for NewsSearchFunction
+      Environment:
+        Variables:
+          TARGET_FUNCTION: !Ref NewsSearchFunction
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - lambda:InvokeFunction
+              Resource: !GetAtt NewsSearchFunction.Arn
+      Events:
+        SchedulerApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGateway
+            Path: /newsfeeds/schedule
+            Method: POST
+        DailyScheduler:
+          Type: ScheduleV2
+          Properties:
+            Name: !Sub "${AWS::StackName}-NewsSearchScheduler-Daily"
+            ScheduleExpression: cron(0 7 * * ? *)
+            Description: Daily News Search fan-out
+            Input: |
+              {
+                "clusters": [1,2,3,4,5,6,7,8,9,10],
+                "locales": ["IT","FR","ES","EN"],
+                "max_results": 10
+              }
+
+  NewsCorrelatorFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${AWS::StackName}-NewsCorrelatorFunction"
+      RetentionInDays: !Ref LogRetentionInDays
+      Tags:
+        - Key: Stage
+          Value: !Ref Stage
+        - Key: Environment
+          Value: !Ref env
+        - Key: Service
+          Value: ai
+
+  NewsCorrelatorFunction:
+    Type: AWS::Serverless::Function
+    DependsOn:
+      - NewsCorrelatorFunctionLogGroup
+    Properties:
+      FunctionName: !Sub "${AWS::StackName}-NewsCorrelatorFunction"
+      Handler: news_correlator_lambda.handler
+      Description: News Correlation Service
+      Environment:
+        Variables:
+          SECRET_NAME: !Sub "${AWS::StackName}-secrets"
+          FEED_SUMMARY_FUNCTION: !Ref FeedSummaryFunction
+          S3_DESTINATION: !Sub "s3://${S3Destination}"
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - secretsmanager:GetSecretValue
+              Resource: !Sub "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:${AWS::StackName}-secrets-*"
+        - Statement:
+            - Effect: Allow
+              Action:
+                - bedrock:*
+              Resource: "*"
+        - Statement:
+            - Effect: Allow
+              Action:
+                - s3:PutObject
+                - s3:GetObject
+              Resource: !Sub "arn:aws:s3:::${S3Destination}/*"
+      Events:
+        NewsCorrelatorService:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGateway
+            Path: /newscorrelator
+            Method: POST
+
+
+Outputs:
+  ApiUrl:
+    Value: !Sub "https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/${Stage}"

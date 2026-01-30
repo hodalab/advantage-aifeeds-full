@@ -1,0 +1,599 @@
+{
+    "clusters": [
+      {
+        "cluster_id": 1,
+        "cluster_name": "Health and Wellness",
+        "cluster_icon": "heart-pulse",
+        "cluster_description": "Health, medicine, wellness and healthy lifestyles",
+        "categories": [
+          {
+            "iab_code": "381",
+            "iab_description": "Health and Medical Services",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "healthcare",
+              "medical services",
+              "hospitals",
+              "clinics",
+              "health assistance",
+              "emergency room",
+              "medical care",
+              "doctors",
+              "specialists",
+              "health system"
+            ]
+          },
+          {
+            "iab_code": "406",
+            "iab_description": "Healthy Living",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "healthy living",
+              "wellness",
+              "prevention",
+              "lifestyle",
+              "healthy eating",
+              "physical activity",
+              "balance",
+              "wellbeing",
+              "natural health",
+              "longevity"
+            ]
+          },
+          {
+            "iab_code": "466",
+            "iab_description": "Medical Health",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "health",
+              "medicine",
+              "pathologies",
+              "diagnosis",
+              "therapies",
+              "diseases",
+              "symptoms",
+              "treatments",
+              "cures",
+              "medical research"
+            ]
+          },
+          {
+            "iab_code": "550",
+            "iab_description": "Pharmaceuticals, Conditions, and Symptoms",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "pharmaceuticals",
+              "medications",
+              "symptoms",
+              "medical conditions",
+              "pharmacology",
+              "side effects",
+              "dosage",
+              "active ingredients",
+              "pharmaceutical",
+              "supplements"
+            ]
+          }
+        ]
+      },
+      {
+        "cluster_id": 2,
+        "cluster_name": "Entertainment and Media",
+        "cluster_icon": "tv",
+        "cluster_description": "Movies, music, TV, pop culture and video games",
+        "categories": [
+          {
+            "iab_code": "467",
+            "iab_description": "Movies",
+            "freshness": false,
+            "top_sources_only": true,
+            "iab_keywords": [
+              "movies",
+              "cinema",
+              "films",
+              "movie reviews",
+              "cinema releases",
+              "directors",
+              "actors",
+              "box office",
+              "film festivals",
+              "series"
+            ]
+          },
+          {
+            "iab_code": "481",
+            "iab_description": "Music and Audio",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "music",
+              "concerts",
+              "albums",
+              "artists",
+              "songs",
+              "music festivals",
+              "music streaming",
+              "playlists",
+              "new releases",
+              "music charts"
+            ]
+          },
+          {
+            "iab_code": "706",
+            "iab_description": "Television",
+            "freshness": true,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "television",
+              "tv shows",
+              "tv schedule",
+              "ratings",
+              "reality shows",
+              "talk shows",
+              "tv series",
+              "hosts",
+              "prime time",
+              "viewership"
+            ]
+          },
+          {
+            "iab_code": "581",
+            "iab_description": "Pop Culture",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "pop culture",
+              "trends",
+              "celebrities",
+              "gossip",
+              "vip",
+              "memes",
+              "viral",
+              "influencers",
+              "social media",
+              "cultural phenomena"
+            ]
+          },
+          {
+            "iab_code": "733",
+            "iab_description": "Video Gaming",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "video games",
+              "gaming",
+              "consoles",
+              "pc gaming",
+              "esports",
+              "game reviews",
+              "new releases",
+              "gameplay",
+              "gaming streaming",
+              "gaming community"
+            ]
+          }
+        ]
+      },
+      {
+        "cluster_id": 3,
+        "cluster_name": "News and Current Affairs",
+        "cluster_icon": "newspaper",
+        "cluster_description": "News, politics and information",
+        "categories": [
+          {
+            "iab_code": "522",
+            "iab_description": "News and Politics",
+            "freshness": true,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "news",
+              "politics",
+              "current affairs",
+              "government",
+              "elections",
+              "breaking news",
+              "international",
+              "political economy",
+              "parliament",
+              "institutions"
+            ]
+          }
+        ]
+      },
+      {
+        "cluster_id": 4,
+        "cluster_name": "Economy and Work",
+        "cluster_icon": "briefcase",
+        "cluster_description": "Business, personal finance and career",
+        "categories": [
+          {
+            "iab_code": "268",
+            "iab_description": "Business and Finance",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "business",
+              "finance",
+              "markets",
+              "stock exchange",
+              "companies",
+              "economy",
+              "investments",
+              "startups",
+              "corporations",
+              "balance sheets"
+            ]
+          },
+          {
+            "iab_code": "534",
+            "iab_description": "Personal Finance",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "personal finance",
+              "savings",
+              "private investments",
+              "money management",
+              "family budget",
+              "checking accounts",
+              "mortgages",
+              "loans",
+              "pensions",
+              "taxes"
+            ]
+          },
+          {
+            "iab_code": "338",
+            "iab_description": "Careers",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "career",
+              "employment",
+              "job offers",
+              "interviews",
+              "resume",
+              "professional training",
+              "skills",
+              "career development",
+              "job opportunities",
+              "recruiting"
+            ]
+          }
+        ]
+      },
+      {
+        "cluster_id": 5,
+        "cluster_name": "Technology",
+        "cluster_icon": "laptop",
+        "cluster_description": "Technology, computing and innovation",
+        "categories": [
+          {
+            "iab_code": "687",
+            "iab_description": "Technology & Computing",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "technology",
+              "computing",
+              "software",
+              "hardware",
+              "artificial intelligence",
+              "innovation",
+              "cybersecurity",
+              "cloud",
+              "apps",
+              "digital"
+            ]
+          }
+        ]
+      },
+      {
+        "cluster_id": 6,
+        "cluster_name": "Sports",
+        "cluster_icon": "trophy",
+        "cluster_description": "Sports, fitness and sporting activities",
+        "categories": [
+          {
+            "iab_code": "607",
+            "iab_description": "Sports",
+            "freshness": true,
+            "top_sources_only": true,
+            "iab_keywords": [
+              "sports",
+              "football",
+              "sports results",
+              "matches",
+              "championships",
+              "athletes",
+              "basketball",
+              "tennis",
+              "formula 1",
+              "olympics"
+            ]
+          }
+        ]
+      },
+      {
+        "cluster_id": 7,
+        "cluster_name": "Lifestyle and Fashion",
+        "cluster_icon": "shopping-bag",
+        "cluster_description": "Fashion, shopping, food, travel and lifestyle",
+        "categories": [
+          {
+            "iab_code": "676",
+            "iab_description": "Style & Fashion",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "fashion",
+              "style",
+              "fashion trends",
+              "designers",
+              "runway shows",
+              "clothing",
+              "accessories",
+              "beauty",
+              "look",
+              "fashion week"
+            ]
+          },
+          {
+            "iab_code": "606",
+            "iab_description": "Shopping",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "shopping",
+              "purchases",
+              "deals",
+              "discounts",
+              "e-commerce",
+              "products",
+              "stores",
+              "product reviews",
+              "black friday",
+              "promotions"
+            ]
+          },
+          {
+            "iab_code": "368",
+            "iab_description": "Food & Drink",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "food",
+              "recipes",
+              "cooking",
+              "restaurants",
+              "gastronomy",
+              "chefs",
+              "wine",
+              "tastings",
+              "food blogs",
+              "culinary traditions"
+            ]
+          },
+          {
+            "iab_code": "719",
+            "iab_description": "Travel",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "travel",
+              "tourism",
+              "destinations",
+              "vacations",
+              "itineraries",
+              "hotels",
+              "flights",
+              "travel guides",
+              "excursions",
+              "adventures"
+            ]
+          }
+        ]
+      },
+      {
+        "cluster_id": 8,
+        "cluster_name": "Home and Family",
+        "cluster_icon": "home",
+        "cluster_description": "Home, family, relationships, pets and real estate",
+        "categories": [
+          {
+            "iab_code": "457",
+            "iab_description": "Home & Garden",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "home",
+              "decoration",
+              "interior design",
+              "garden",
+              "diy",
+              "renovations",
+              "home design",
+              "decor",
+              "furniture",
+              "gardening"
+            ]
+          },
+          {
+            "iab_code": "348",
+            "iab_description": "Family and Relationships",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "family",
+              "relationships",
+              "parents",
+              "children",
+              "parenting",
+              "couples",
+              "marriage",
+              "pregnancy",
+              "family advice",
+              "interpersonal relationships"
+            ]
+          },
+          {
+            "iab_code": "541",
+            "iab_description": "Pets",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "pets",
+              "dogs",
+              "cats",
+              "veterinary",
+              "pet care",
+              "animal care",
+              "pet nutrition",
+              "training",
+              "adoption",
+              "animal behavior"
+            ]
+          },
+          {
+            "iab_code": "583",
+            "iab_description": "Real Estate",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "real estate",
+              "houses",
+              "apartments",
+              "property sales",
+              "rentals",
+              "home mortgages",
+              "real estate market",
+              "agencies",
+              "real estate investments",
+              "construction"
+            ]
+          }
+        ]
+      },
+      {
+        "cluster_id": 9,
+        "cluster_name": "Culture and Education",
+        "cluster_icon": "book",
+        "cluster_description": "Books, art, education and hobbies",
+        "categories": [
+          {
+            "iab_code": "258",
+            "iab_description": "Books and Literature",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "books",
+              "literature",
+              "novels",
+              "writers",
+              "reading",
+              "book reviews",
+              "new releases",
+              "bestsellers",
+              "authors",
+              "publishing"
+            ]
+          },
+          {
+            "iab_code": "359",
+            "iab_description": "Fine Art",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "art",
+              "exhibitions",
+              "artists",
+              "painting",
+              "sculpture",
+              "galleries",
+              "museums",
+              "artworks",
+              "contemporary art",
+              "shows"
+            ]
+          },
+          {
+            "iab_code": "207",
+            "iab_description": "Academic Interests",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "university",
+              "research",
+              "studies",
+              "training",
+              "school",
+              "education",
+              "courses",
+              "degree",
+              "teaching",
+              "academia"
+            ]
+          },
+          {
+            "iab_code": "422",
+            "iab_description": "Hobbies & Interests",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "hobbies",
+              "passions",
+              "leisure time",
+              "collecting",
+              "modeling",
+              "crafts",
+              "photography",
+              "creativity",
+              "handicrafts",
+              "recreational activities"
+            ]
+          }
+        ]
+      },
+      {
+        "cluster_id": 10,
+        "cluster_name": "Automotive",
+        "cluster_icon": "car",
+        "cluster_description": "Automotive, cars and motors",
+        "categories": [
+          {
+            "iab_code": "243",
+            "iab_description": "Automotive",
+            "freshness": false,
+            "top_sources_only": false,
+            "iab_keywords": [
+              "cars",
+              "automobiles",
+              "motors",
+              "new cars",
+              "test drives",
+              "road tests",
+              "electric cars",
+              "automotive market",
+              "motorcycles",
+              "motorsports"
+            ]
+          }
+        ]
+      }
+    ],
+    "summary": {
+      "total_clusters": 10,
+      "total_categories": 28,
+      "categories_with_freshness_true": 3,
+      "distribution": {
+        "1_category": 4,
+        "3_categories": 2,
+        "4_categories": 3,
+        "5_categories": 1
+      }
+    }
+  }

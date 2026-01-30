@@ -1,0 +1,599 @@
+{
+  "clusters": [
+    {
+      "cluster_id": 1,
+      "cluster_name": "Salute e Benessere",
+      "cluster_icon": "heart-pulse",
+      "cluster_description": "Salute, medicina, benessere e stili di vita sani",
+      "categories": [
+        {
+          "iab_code": "381",
+          "iab_description": "Health and Medical Services",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "sanità",
+            "servizi medici",
+            "ospedali",
+            "cliniche",
+            "assistenza sanitaria",
+            "pronto soccorso",
+            "cure mediche",
+            "medici",
+            "specialisti",
+            "sistema sanitario"
+          ]
+        },
+        {
+          "iab_code": "406",
+          "iab_description": "Healthy Living",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "vita sana",
+            "benessere",
+            "prevenzione",
+            "stile di vita",
+            "alimentazione sana",
+            "attività fisica",
+            "equilibrio",
+            "wellness",
+            "salute naturale",
+            "longevità"
+          ]
+        },
+        {
+          "iab_code": "466",
+          "iab_description": "Medical Health",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "salute",
+            "medicina",
+            "patologie",
+            "diagnosi",
+            "terapie",
+            "malattie",
+            "sintomi",
+            "cure",
+            "trattamenti",
+            "ricerca medica"
+          ]
+        },
+        {
+          "iab_code": "550",
+          "iab_description": "Pharmaceuticals, Conditions, and Symptoms",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "farmaci",
+            "medicinali",
+            "sintomi",
+            "condizioni mediche",
+            "farmacologia",
+            "effetti collaterali",
+            "posologia",
+            "principi attivi",
+            "farmaceutica",
+            "integratori"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": 2,
+      "cluster_name": "Intrattenimento e Media",
+      "cluster_icon": "tv",
+      "cluster_description": "Cinema, musica, TV, cultura pop e videogiochi",
+      "categories": [
+        {
+          "iab_code": "467",
+          "iab_description": "Movies",
+          "freshness": false,
+          "top_sources_only": true,
+          "iab_keywords": [
+            "film",
+            "cinema",
+            "pellicole",
+            "recensioni film",
+            "uscite cinema",
+            "registi",
+            "attori",
+            "box office",
+            "festival cinema",
+            "serie tv"
+          ]
+        },
+        {
+          "iab_code": "481",
+          "iab_description": "Music and Audio",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "musica",
+            "concerti",
+            "album",
+            "artisti",
+            "canzoni",
+            "festival musicali",
+            "streaming musicale",
+            "playlist",
+            "nuove uscite",
+            "classifiche musicali"
+          ]
+        },
+        {
+          "iab_code": "706",
+          "iab_description": "Television",
+          "freshness": true,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "televisione",
+            "programmi tv",
+            "palinsesto",
+            "ascolti tv",
+            "reality show",
+            "talk show",
+            "serie televisive",
+            "conduttori",
+            "prime time",
+            "share"
+          ]
+        },
+        {
+          "iab_code": "581",
+          "iab_description": "Pop Culture",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "cultura popolare",
+            "tendenze",
+            "celebrità",
+            "gossip",
+            "vip",
+            "meme",
+            "viral",
+            "influencer",
+            "social media",
+            "fenomeni culturali"
+          ]
+        },
+        {
+          "iab_code": "733",
+          "iab_description": "Video Gaming",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "videogiochi",
+            "gaming",
+            "console",
+            "pc gaming",
+            "esports",
+            "recensioni giochi",
+            "nuove uscite",
+            "gameplay",
+            "streaming gaming",
+            "comunità gaming"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": 3,
+      "cluster_name": "News e Attualità",
+      "cluster_icon": "newspaper",
+      "cluster_description": "Notizie, politica e informazione",
+      "categories": [
+        {
+          "iab_code": "522",
+          "iab_description": "News and Politics",
+          "freshness": true,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "notizie",
+            "politica",
+            "attualità",
+            "governo",
+            "elezioni",
+            "cronaca",
+            "esteri",
+            "economia politica",
+            "parlamento",
+            "istituzioni"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": 4,
+      "cluster_name": "Economia e Lavoro",
+      "cluster_icon": "briefcase",
+      "cluster_description": "Business, finanza personale e carriera",
+      "categories": [
+        {
+          "iab_code": "268",
+          "iab_description": "Business and Finance",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "business",
+            "finanza",
+            "mercati",
+            "borsa",
+            "imprese",
+            "economia",
+            "investimenti",
+            "startup",
+            "aziende",
+            "bilanci"
+          ]
+        },
+        {
+          "iab_code": "534",
+          "iab_description": "Personal Finance",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "finanza personale",
+            "risparmi",
+            "investimenti privati",
+            "gestione denaro",
+            "budget familiare",
+            "conti correnti",
+            "mutui",
+            "prestiti",
+            "pensioni",
+            "tasse"
+          ]
+        },
+        {
+          "iab_code": "338",
+          "iab_description": "Careers",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "carriera",
+            "lavoro",
+            "offerte lavoro",
+            "colloqui",
+            "curriculum",
+            "formazione professionale",
+            "competenze",
+            "sviluppo carriera",
+            "opportunità professionali",
+            "recruiting"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": 5,
+      "cluster_name": "Tecnologia",
+      "cluster_icon": "laptop",
+      "cluster_description": "Tecnologia, informatica e innovazione",
+      "categories": [
+        {
+          "iab_code": "687",
+          "iab_description": "Technology & Computing",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "tecnologia",
+            "informatica",
+            "software",
+            "hardware",
+            "intelligenza artificiale",
+            "innovazione",
+            "cybersecurity",
+            "cloud",
+            "app",
+            "digital"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": 6,
+      "cluster_name": "Sport",
+      "cluster_icon": "trophy",
+      "cluster_description": "Sport, fitness e attività sportive",
+      "categories": [
+        {
+          "iab_code": "607",
+          "iab_description": "Sports",
+          "freshness": true,
+          "top_sources_only": true,
+          "iab_keywords": [
+            "sport",
+            "calcio",
+            "risultati sportivi",
+            "partite",
+            "campionati",
+            "atleti",
+            "basket",
+            "tennis",
+            "formula 1",
+            "olimpiadi"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": 7,
+      "cluster_name": "Lifestyle e Moda",
+      "cluster_icon": "shopping-bag",
+      "cluster_description": "Moda, shopping, food, viaggi e stile di vita",
+      "categories": [
+        {
+          "iab_code": "676",
+          "iab_description": "Style & Fashion",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "moda",
+            "fashion",
+            "tendenze moda",
+            "stilisti",
+            "sfilate",
+            "abbigliamento",
+            "accessori",
+            "beauty",
+            "look",
+            "fashion week"
+          ]
+        },
+        {
+          "iab_code": "606",
+          "iab_description": "Shopping",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "shopping",
+            "acquisti",
+            "offerte",
+            "sconti",
+            "e-commerce",
+            "prodotti",
+            "negozi",
+            "recensioni prodotti",
+            "black friday",
+            "promozioni"
+          ]
+        },
+        {
+          "iab_code": "368",
+          "iab_description": "Food & Drink",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "cibo",
+            "ricette",
+            "cucina",
+            "ristoranti",
+            "enogastronomia",
+            "chef",
+            "vino",
+            "degustazioni",
+            "food blog",
+            "tradizioni culinarie"
+          ]
+        },
+        {
+          "iab_code": "719",
+          "iab_description": "Travel",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "viaggi",
+            "turismo",
+            "destinazioni",
+            "vacanze",
+            "itinerari",
+            "hotel",
+            "voli",
+            "guide turistiche",
+            "escursioni",
+            "avventure"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": 8,
+      "cluster_name": "Casa e Famiglia",
+      "cluster_icon": "home",
+      "cluster_description": "Casa, famiglia, relazioni, animali e immobiliare",
+      "categories": [
+        {
+          "iab_code": "457",
+          "iab_description": "Home & Garden",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "casa",
+            "arredamento",
+            "design casa",
+            "giardino",
+            "fai da te",
+            "ristrutturazioni",
+            "interior design",
+            "decorazione",
+            "mobili",
+            "giardinaggio"
+          ]
+        },
+        {
+          "iab_code": "348",
+          "iab_description": "Family and Relationships",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "famiglia",
+            "relazioni",
+            "genitori",
+            "figli",
+            "educazione bambini",
+            "coppia",
+            "matrimonio",
+            "gravidanza",
+            "consigli famiglia",
+            "rapporti interpersonali"
+          ]
+        },
+        {
+          "iab_code": "541",
+          "iab_description": "Pets",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "animali domestici",
+            "cani",
+            "gatti",
+            "veterinario",
+            "cura animali",
+            "pet care",
+            "alimentazione animali",
+            "addestramento",
+            "adozione",
+            "comportamento animali"
+          ]
+        },
+        {
+          "iab_code": "583",
+          "iab_description": "Real Estate",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "immobiliare",
+            "case",
+            "appartamenti",
+            "vendita immobili",
+            "affitto",
+            "mutui casa",
+            "mercato immobiliare",
+            "agenzie",
+            "investimenti immobiliari",
+            "costruzioni"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": 9,
+      "cluster_name": "Cultura e Educazione",
+      "cluster_icon": "book",
+      "cluster_description": "Libri, arte, formazione e hobby",
+      "categories": [
+        {
+          "iab_code": "258",
+          "iab_description": "Books and Literature",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "libri",
+            "letteratura",
+            "romanzi",
+            "scrittori",
+            "lettura",
+            "recensioni libri",
+            "nuove uscite",
+            "bestseller",
+            "autori",
+            "editoria"
+          ]
+        },
+        {
+          "iab_code": "359",
+          "iab_description": "Fine Art",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "arte",
+            "mostre",
+            "artisti",
+            "pittura",
+            "scultura",
+            "gallerie",
+            "musei",
+            "opere d'arte",
+            "arte contemporanea",
+            "esposizioni"
+          ]
+        },
+        {
+          "iab_code": "207",
+          "iab_description": "Academic Interests",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "università",
+            "ricerca",
+            "studi",
+            "formazione",
+            "scuola",
+            "educazione",
+            "corsi",
+            "laurea",
+            "didattica",
+            "accademia"
+          ]
+        },
+        {
+          "iab_code": "422",
+          "iab_description": "Hobbies & Interests",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "hobby",
+            "passioni",
+            "tempo libero",
+            "collezionismo",
+            "modellismo",
+            "bricolage",
+            "fotografia",
+            "creatività",
+            "artigianato",
+            "attività ricreative"
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": 10,
+      "cluster_name": "Auto e Motori",
+      "cluster_icon": "car",
+      "cluster_description": "Automotive, auto e motori",
+      "categories": [
+        {
+          "iab_code": "243",
+          "iab_description": "Automotive",
+          "freshness": false,
+          "top_sources_only": false,
+          "iab_keywords": [
+            "auto",
+            "automobili",
+            "motori",
+            "nuove auto",
+            "test drive",
+            "prove su strada",
+            "auto elettriche",
+            "mercato auto",
+            "moto",
+            "motorsport"
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_clusters": 10,
+    "total_categories": 28,
+    "categories_with_freshness_true": 3,
+    "distribution": {
+      "1_category": 4,
+      "3_categories": 2,
+      "4_categories": 3,
+      "5_categories": 1
+    }
+  }
+}

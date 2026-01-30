@@ -1,0 +1,322 @@
+{
+    "categories": [
+      {
+        "iab_code": "207",
+        "iab_description": "Academic Interests",
+        "sites": [
+          "elmundo.es/universidad",
+          "elpais.com/educacion",
+          "educaciontrespuntocero.com",
+          "unir.net/actualidad-unir",
+          "abc.es/familia/educacion"
+        ]
+      },
+      {
+        "iab_code": "243",
+        "iab_description": "Automotive",
+        "sites": [
+          "motorpasion.com",
+          "autofacil.es",
+          "coches.net",
+          "autocasion.com",
+          "km77.com"
+        ]
+      },
+      {
+        "iab_code": "258",
+        "iab_description": "Books and Literature",
+        "sites": [
+          "elpais.com/cultura/babelia",
+          "abc.es/cultura/libros",
+          "lecturalia.com",
+          "culturamas.es",
+          "infolibre.es/cultura/libros"
+        ]
+      },
+      {
+        "iab_code": "268",
+        "iab_description": "Business and Finance",
+        "sites": [
+          "expansion.com",
+          "cincodias.elpais.com",
+          "eleconomista.es",
+          "abc.es/economia",
+          "pymesyautonomos.com"
+        ]
+      },
+      {
+        "iab_code": "338",
+        "iab_description": "Careers",
+        "sites": [
+          "infojobs.net",
+          "infoempleo.com",
+          "cincodias.elpais.com/empleo",
+          "expansion.com/empleo",
+          "modelocurriculum.net"
+        ]
+      },
+      {
+        "iab_code": "348",
+        "iab_description": "Family and Relationships",
+        "sites": [
+          "serpadres.es",
+          "guiainfantil.com",
+          "bebesymas.com",
+          "elpais.com/mamas-papas",
+          "conmishijos.com"
+        ]
+      },
+      {
+        "iab_code": "359",
+        "iab_description": "Fine Art",
+        "sites": [
+          "abc.es/cultura/arte",
+          "elcultural.com",
+          "elpais.com/cultura/arte",
+          "lasexta.com/cultura",
+          "rtve.es/noticias/cultura"
+        ]
+      },
+      {
+        "iab_code": "368",
+        "iab_description": "Food & Drink",
+        "sites": [
+          "directoalpaladar.com",
+          "recetasderechupete.com",
+          "cocinillas.elespanol.com",
+          "gastronomiaycia.republica.com",
+          "elmundo.es/gastro"
+        ]
+      },
+      {
+        "iab_code": "381",
+        "iab_description": "Health and Medical Services",
+        "sites": [
+          "cuidateplus.marca.com",
+          "topdoctors.es",
+          "sanitas.es/biblioteca-de-salud",
+          "quironsalud.es",
+          "elpais.com/salud"
+        ]
+      },
+      {
+        "iab_code": "406",
+        "iab_description": "Healthy Living",
+        "sites": [
+          "webconsultas.com",
+          "cuerpomente.com",
+          "clara.es/bienestar",
+          "vitonica.com",
+          "medlineplus.gov/spanish"
+        ]
+      },
+      {
+        "iab_code": "422",
+        "iab_description": "Hobbies & Interests",
+        "sites": [
+          "hobbyconsolas.com",
+          "facilisimo.com",
+          "manualidadesonline.com",
+          "okdiario.com/aficiones",
+          "abc.es/summum"
+        ]
+      },
+      {
+        "iab_code": "457",
+        "iab_description": "Home & Garden",
+        "sites": [
+          "elmueble.com",
+          "micasarevista.com",
+          "decoora.com",
+          "hola.com/decoracion",
+          "arquitecturaydiseno.es"
+        ]
+      },
+      {
+        "iab_code": "466",
+        "iab_description": "Medical Health",
+        "sites": [
+          "cuidateplus.marca.com",
+          "medlineplus.gov/spanish",
+          "infosalus.com",
+          "dmedicina.com",
+          "consalud.es"
+        ]
+      },
+      {
+        "iab_code": "467",
+        "iab_description": "Movies",
+        "sites": [
+          "sensacine.com",
+          "fotogramas.es",
+          "espinof.com",
+          "elpais.com/cultura/cine",
+          "abc.es/play/cine"
+        ]
+      },
+      {
+        "iab_code": "481",
+        "iab_description": "Music and Audio",
+        "sites": [
+          "jenesaispop.com",
+          "mondosonoro.com",
+          "elpais.com/cultura/musica",
+          "los40.com",
+          "rtve.es/noticias/musica"
+        ]
+      },
+      {
+        "iab_code": "522",
+        "iab_description": "News and Politics",
+        "sites": [
+          "elpais.com",
+          "elmundo.es",
+          "lavanguardia.com",
+          "abc.es",
+          "eldiario.es"
+        ]
+      },
+      {
+        "iab_code": "534",
+        "iab_description": "Personal Finance",
+        "sites": [
+          "finanzas.com",
+          "expansion.com/ahorro",
+          "eleconomista.es/finanzas-personales",
+          "bankinter.com/blog",
+          "finect.com"
+        ]
+      },
+      {
+        "iab_code": "541",
+        "iab_description": "Pets",
+        "sites": [
+          "expertoanimal.com",
+          "mundoanimalia.com",
+          "affinity-petcare.com/advance",
+          "tiendanimal.es/articulos",
+          "consumer.es/mascotas"
+        ]
+      },
+      {
+        "iab_code": "550",
+        "iab_description": "Pharmaceuticals, Conditions, and Symptoms",
+        "sites": [
+          "cuidateplus.marca.com",
+          "medlineplus.gov/spanish",
+          "cinfasalud.com",
+          "dosfarma.com/blog",
+          "infosalus.com"
+        ]
+      },
+      {
+        "iab_code": "581",
+        "iab_description": "Pop Culture",
+        "sites": [
+          "los40.com",
+          "sensacine.com",
+          "elpais.com/icon",
+          "vogue.es/cultura",
+          "smoda.elpais.com"
+        ]
+      },
+      {
+        "iab_code": "583",
+        "iab_description": "Real Estate",
+        "sites": [
+          "idealista.com",
+          "fotocasa.es",
+          "pisos.com",
+          "expansion.com/vivienda",
+          "elpais.com/economia/vivienda"
+        ]
+      },
+      {
+        "iab_code": "606",
+        "iab_description": "Shopping",
+        "sites": [
+          "elcorteingles.es",
+          "pccomponentes.com",
+          "mediamarkt.es",
+          "amazon.es",
+          "ocu.org"
+        ]
+      },
+      {
+        "iab_code": "607",
+        "iab_description": "Sports",
+        "sites": [
+          "marca.com",
+          "as.com",
+          "mundodeportivo.com",
+          "sport.es",
+          "eldesmarque.com",
+          "elmundo.es/deportes",
+          "abc.es/deportes"
+        ]
+      },
+      {
+        "iab_code": "676",
+        "iab_description": "Style & Fashion",
+        "sites": [
+          "vogue.es",
+          "elle.es",
+          "smoda.elpais.com",
+          "hola.com/moda",
+          "telva.com"
+        ]
+      },
+      {
+        "iab_code": "687",
+        "iab_description": "Technology & Computing",
+        "sites": [
+          "xataka.com",
+          "computerhoy.com",
+          "hipertextual.com",
+          "elpais.com/tecnologia",
+          "elchapuzasinformatico.com"
+        ]
+      },
+      {
+        "iab_code": "706",
+        "iab_description": "Television",
+        "sites": [
+          "formulatv.com",
+          "vertele.eldiario.es",
+          "abc.es/play/television",
+          "vanitatis.elconfidencial.com/television",
+          "elpais.com/television"
+        ]
+      },
+      {
+        "iab_code": "719",
+        "iab_description": "Travel",
+        "sites": [
+          "elviajero.elpais.com",
+          "lonelyplanet.es",
+          "traveler.es",
+          "skyscanner.es/noticias",
+          "viajeselcorteingles.es/blog"
+        ]
+      },
+      {
+        "iab_code": "733",
+        "iab_description": "Video Gaming",
+        "sites": [
+          "vandal.elespanol.com",
+          "3djuegos.com",
+          "meristation.com",
+          "hobbyconsolas.com",
+          "elotrolado.net"
+        ]
+      }
+    ],
+    "blocked_domains": [
+      "marketscreener.com",
+      "es.marketscreener.com",
+      "en.marketscreener.com",
+      "wsj.com",
+      "ft.com",
+      "bloomberg.com"
+    ]
+  }

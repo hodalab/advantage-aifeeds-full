@@ -1,0 +1,322 @@
+{
+    "categories": [
+      {
+        "iab_code": "207",
+        "iab_description": "Academic Interests",
+        "sites": [
+          "letudiant.fr",
+          "studyrama.com",
+          "lemonde.fr/campus",
+          "orientation-education.com",
+          "onisep.fr"
+        ]
+      },
+      {
+        "iab_code": "243",
+        "iab_description": "Automotive",
+        "sites": [
+          "automobile-magazine.fr",
+          "autoplus.fr",
+          "caradisiac.com",
+          "largus.fr",
+          "auto-moto.com"
+        ]
+      },
+      {
+        "iab_code": "258",
+        "iab_description": "Books and Literature",
+        "sites": [
+          "livreshebdo.fr",
+          "lemonde.fr/livres",
+          "lefigaro.fr/livres",
+          "actualitte.com",
+          "telerama.fr/livres"
+        ]
+      },
+      {
+        "iab_code": "268",
+        "iab_description": "Business and Finance",
+        "sites": [
+          "lesechos.fr",
+          "latribune.fr",
+          "boursorama.com",
+          "capital.fr",
+          "challenges.fr"
+        ]
+      },
+      {
+        "iab_code": "338",
+        "iab_description": "Careers",
+        "sites": [
+          "cadremploi.fr",
+          "monster.fr",
+          "apec.fr",
+          "regionsjob.com",
+          "lemonde.fr/emploi"
+        ]
+      },
+      {
+        "iab_code": "348",
+        "iab_description": "Family and Relationships",
+        "sites": [
+          "magicmaman.com",
+          "parents.fr",
+          "aufeminin.com/famille",
+          "notrefamille.com",
+          "enfant.com"
+        ]
+      },
+      {
+        "iab_code": "359",
+        "iab_description": "Fine Art",
+        "sites": [
+          "connaissancedesarts.com",
+          "beaux-arts.com",
+          "lemonde.fr/arts",
+          "lefigaro.fr/arts-expositions",
+          "artpress.com"
+        ]
+      },
+      {
+        "iab_code": "368",
+        "iab_description": "Food & Drink",
+        "sites": [
+          "marmiton.org",
+          "750g.com",
+          "cuisineaz.com",
+          "journaldesfemmes.fr/cuisine",
+          "lexpress.fr/styles/saveurs"
+        ]
+      },
+      {
+        "iab_code": "381",
+        "iab_description": "Health and Medical Services",
+        "sites": [
+          "ameli.fr",
+          "service-public.fr/particuliers/sante",
+          "sante.gouv.fr",
+          "doctissimo.fr",
+          "lemonde.fr/sante"
+        ]
+      },
+      {
+        "iab_code": "406",
+        "iab_description": "Healthy Living",
+        "sites": [
+          "passeportsante.net",
+          "topsante.com",
+          "santemagazine.fr",
+          "femmeactuelle.fr/sante",
+          "psychologies.com"
+        ]
+      },
+      {
+        "iab_code": "422",
+        "iab_description": "Hobbies & Interests",
+        "sites": [
+          "marieclaire.fr/idees",
+          "femmeactuelle.fr/loisirs-culture",
+          "prima.fr/loisirs-creatifs",
+          "systemed.fr",
+          "bricoleurdudimanche.com"
+        ]
+      },
+      {
+        "iab_code": "457",
+        "iab_description": "Home & Garden",
+        "sites": [
+          "cotemaison.fr",
+          "maisonapart.com",
+          "elle.fr/deco",
+          "marieclaire.fr/maison",
+          "deco.fr"
+        ]
+      },
+      {
+        "iab_code": "466",
+        "iab_description": "Medical Health",
+        "sites": [
+          "vidal.fr",
+          "doctissimo.fr",
+          "santemagazine.fr",
+          "sante.journaldesfemmes.fr",
+          "pourquoidocteur.fr"
+        ]
+      },
+      {
+        "iab_code": "467",
+        "iab_description": "Movies",
+        "sites": [
+          "allocine.fr",
+          "premiere.fr",
+          "lesinrocks.com/cinema",
+          "telerama.fr/cinema",
+          "lemonde.fr/cinema"
+        ]
+      },
+      {
+        "iab_code": "481",
+        "iab_description": "Music and Audio",
+        "sites": [
+          "lesinrocks.com/musique",
+          "telerama.fr/musique",
+          "lefigaro.fr/musique",
+          "lemonde.fr/musiques",
+          "france24.com/fr/culture/musique"
+        ]
+      },
+      {
+        "iab_code": "522",
+        "iab_description": "News and Politics",
+        "sites": [
+          "lemonde.fr",
+          "lefigaro.fr",
+          "liberation.fr",
+          "francetvinfo.fr",
+          "20minutes.fr"
+        ]
+      },
+      {
+        "iab_code": "534",
+        "iab_description": "Personal Finance",
+        "sites": [
+          "moneyvox.fr",
+          "boursorama.com",
+          "lesechos.fr/patrimoine",
+          "capital.fr/votre-argent",
+          "budgetfacile.com"
+        ]
+      },
+      {
+        "iab_code": "541",
+        "iab_description": "Pets",
+        "sites": [
+          "wamiz.com",
+          "30millionsdamis.fr",
+          "animaux-online.com",
+          "toutsurmeschiens.fr",
+          "chatsdumonde.com"
+        ]
+      },
+      {
+        "iab_code": "550",
+        "iab_description": "Pharmaceuticals, Conditions, and Symptoms",
+        "sites": [
+          "vidal.fr",
+          "doctissimo.fr/medicaments",
+          "eurekasante.vidal.fr",
+          "ameli.fr/assure/sante",
+          "pharmaciengiphar.com"
+        ]
+      },
+      {
+        "iab_code": "581",
+        "iab_description": "Pop Culture",
+        "sites": [
+          "purepeople.com",
+          "gala.fr",
+          "voici.fr",
+          "madmoizelle.com",
+          "konbini.com"
+        ]
+      },
+      {
+        "iab_code": "583",
+        "iab_description": "Real Estate",
+        "sites": [
+          "seloger.com",
+          "leboncoin.fr/immobilier",
+          "pap.fr",
+          "logic-immo.com",
+          "bienici.com"
+        ]
+      },
+      {
+        "iab_code": "606",
+        "iab_description": "Shopping",
+        "sites": [
+          "quechoisir.org",
+          "amazon.fr",
+          "fnac.com",
+          "lesnumeriques.com",
+          "dealabs.com"
+        ]
+      },
+      {
+        "iab_code": "607",
+        "iab_description": "Sports",
+        "sites": [
+          "lequipe.fr",
+          "francetvsport.fr",
+          "eurosport.fr",
+          "foot-sur7.fr",
+          "sport24.lefigaro.fr",
+          "sports.fr",
+          "20minutes.fr/sport"
+        ]
+      },
+      {
+        "iab_code": "676",
+        "iab_description": "Style & Fashion",
+        "sites": [
+          "vogue.fr",
+          "elle.fr/mode",
+          "madame.lefigaro.fr/mode",
+          "marieclaire.fr/mode",
+          "grazia.fr"
+        ]
+      },
+      {
+        "iab_code": "687",
+        "iab_description": "Technology & Computing",
+        "sites": [
+          "01net.com",
+          "clubic.com",
+          "frandroid.com",
+          "numerama.com",
+          "lesnumeriques.com"
+        ]
+      },
+      {
+        "iab_code": "706",
+        "iab_description": "Television",
+        "sites": [
+          "programme-tv.net",
+          "telerama.fr/television",
+          "ozap.com",
+          "allocinetv.fr",
+          "lefigaro.fr/tv"
+        ]
+      },
+      {
+        "iab_code": "719",
+        "iab_description": "Travel",
+        "sites": [
+          "routard.com",
+          "geo.fr",
+          "voyage.linternaute.com",
+          "petitfute.com",
+          "voyageurs-du-monde.fr/magazine"
+        ]
+      },
+      {
+        "iab_code": "733",
+        "iab_description": "Video Gaming",
+        "sites": [
+          "jeuxvideo.com",
+          "gamekult.com",
+          "jeuxactu.com",
+          "jeux-video.fr",
+          "jeuxvideo.fr"
+        ]
+      }
+    ],
+    "blocked_domains": [
+      "marketscreener.com",
+      "fr.marketscreener.com",
+      "en.marketscreener.com",
+      "wsj.com",
+      "ft.com",
+      "bloomberg.com"
+    ]
+  }

@@ -1,0 +1,322 @@
+{
+    "categories": [
+      {
+        "iab_code": "207",
+        "iab_description": "Academic Interests",
+        "sites": [
+          "theguardian.com/education",
+          "bbc.com/news/education",
+          "timeshighereducation.com",
+          "universityworldnews.com",
+          "eua.eu"
+        ]
+      },
+      {
+        "iab_code": "243",
+        "iab_description": "Automotive",
+        "sites": [
+          "autoexpress.co.uk",
+          "autocar.co.uk",
+          "motorauthority.com",
+          "electrek.co",
+          "insideevs.com"
+        ]
+      },
+      {
+        "iab_code": "258",
+        "iab_description": "Books and Literature",
+        "sites": [
+          "theguardian.com/books",
+          "bbc.com/culture/books",
+          "literaryreview.co.uk",
+          "thebookseller.com",
+          "publishersweekly.com"
+        ]
+      },
+      {
+        "iab_code": "268",
+        "iab_description": "Business and Finance",
+        "sites": [
+          "reuters.com/business",
+          "bbc.com/news/business",
+          "theguardian.com/business",
+          "euronews.com/business",
+          "investing.com"
+        ]
+      },
+      {
+        "iab_code": "338",
+        "iab_description": "Careers",
+        "sites": [
+          "indeed.com",
+          "monster.com",
+          "linkedin.com/news",
+          "totaljobs.com",
+          "reed.co.uk/career-advice"
+        ]
+      },
+      {
+        "iab_code": "348",
+        "iab_description": "Family and Relationships",
+        "sites": [
+          "bbc.com/news/health",
+          "theguardian.com/lifeandstyle/parents-and-parenting",
+          "netmums.com",
+          "mumsnet.com",
+          "babycentre.co.uk"
+        ]
+      },
+      {
+        "iab_code": "359",
+        "iab_description": "Fine Art",
+        "sites": [
+          "theguardian.com/artanddesign",
+          "bbc.com/culture/art",
+          "artnews.com",
+          "artforum.com",
+          "apollo-magazine.com"
+        ]
+      },
+      {
+        "iab_code": "368",
+        "iab_description": "Food & Drink",
+        "sites": [
+          "bbcgoodfood.com",
+          "theguardian.com/food",
+          "seriouseats.com",
+          "bonappetit.com",
+          "delicious-magazine.co.uk"
+        ]
+      },
+      {
+        "iab_code": "381",
+        "iab_description": "Health and Medical Services",
+        "sites": [
+          "nhs.uk",
+          "who.int/news",
+          "bbc.com/news/health",
+          "theguardian.com/society/health",
+          "medscape.com"
+        ]
+      },
+      {
+        "iab_code": "406",
+        "iab_description": "Healthy Living",
+        "sites": [
+          "bbc.com/future/health",
+          "healthline.com",
+          "webmd.com",
+          "everydayhealth.com",
+          "theguardian.com/lifeandstyle/health-and-wellbeing"
+        ]
+      },
+      {
+        "iab_code": "422",
+        "iab_description": "Hobbies & Interests",
+        "sites": [
+          "instructables.com",
+          "creativebloq.com",
+          "craftscouncil.org.uk",
+          "makezine.com",
+          "gathered.how"
+        ]
+      },
+      {
+        "iab_code": "457",
+        "iab_description": "Home & Garden",
+        "sites": [
+          "gardenersworld.com",
+          "rhs.org.uk",
+          "idealhome.co.uk",
+          "goodhousekeeping.com/home",
+          "houzz.com"
+        ]
+      },
+      {
+        "iab_code": "466",
+        "iab_description": "Medical Health",
+        "sites": [
+          "bmj.com",
+          "thelancet.com",
+          "nature.com/subjects/diseases",
+          "medicalnewstoday.com",
+          "healtheuropa.com"
+        ]
+      },
+      {
+        "iab_code": "467",
+        "iab_description": "Movies",
+        "sites": [
+          "bbc.com/culture/film",
+          "theguardian.com/film",
+          "empireonline.com",
+          "screendaily.com",
+          "variety.com"
+        ]
+      },
+      {
+        "iab_code": "481",
+        "iab_description": "Music and Audio",
+        "sites": [
+          "bbc.com/music",
+          "theguardian.com/music",
+          "nme.com",
+          "pitchfork.com",
+          "rollingstone.com"
+        ]
+      },
+      {
+        "iab_code": "522",
+        "iab_description": "News and Politics",
+        "sites": [
+          "bbc.com/news",
+          "theguardian.com",
+          "reuters.com",
+          "euronews.com",
+          "dw.com/en"
+        ]
+      },
+      {
+        "iab_code": "534",
+        "iab_description": "Personal Finance",
+        "sites": [
+          "moneysavingexpert.com",
+          "which.co.uk/money",
+          "theguardian.com/money",
+          "investopedia.com",
+          "fool.com"
+        ]
+      },
+      {
+        "iab_code": "541",
+        "iab_description": "Pets",
+        "sites": [
+          "thekennelclub.org.uk",
+          "rspca.org.uk/adviceandwelfare",
+          "pdsa.org.uk/pet-help-and-advice",
+          "cats.org.uk",
+          "bluecross.org.uk/advice"
+        ]
+      },
+      {
+        "iab_code": "550",
+        "iab_description": "Pharmaceuticals, Conditions, and Symptoms",
+        "sites": [
+          "nhs.uk/conditions",
+          "ema.europa.eu",
+          "drugs.com",
+          "mayoclinic.org",
+          "patient.info"
+        ]
+      },
+      {
+        "iab_code": "581",
+        "iab_description": "Pop Culture",
+        "sites": [
+          "bbc.com/culture",
+          "theguardian.com/culture",
+          "independent.co.uk/arts-entertainment",
+          "digitalspy.com",
+          "popsugar.com"
+        ]
+      },
+      {
+        "iab_code": "583",
+        "iab_description": "Real Estate",
+        "sites": [
+          "rightmove.co.uk",
+          "zoopla.co.uk",
+          "propertyreporter.co.uk",
+          "estateagenttoday.co.uk",
+          "globalpropertyguide.com"
+        ]
+      },
+      {
+        "iab_code": "606",
+        "iab_description": "Shopping",
+        "sites": [
+          "which.co.uk",
+          "trustpilot.com",
+          "techradar.com",
+          "expertreviews.co.uk",
+          "pocket-lint.com"
+        ]
+      },
+      {
+        "iab_code": "607",
+        "iab_description": "Sports",
+        "sites": [
+          "bbc.com/sport",
+          "theguardian.com/sport",
+          "eurosport.com",
+          "skysports.com",
+          "espn.com",
+          "reuters.com/sports",
+          "sportingnews.com"
+        ]
+      },
+      {
+        "iab_code": "676",
+        "iab_description": "Style & Fashion",
+        "sites": [
+          "vogue.co.uk",
+          "harpersbazaar.com",
+          "elle.com",
+          "dazeddigital.com",
+          "theguardian.com/fashion"
+        ]
+      },
+      {
+        "iab_code": "687",
+        "iab_description": "Technology & Computing",
+        "sites": [
+          "bbc.com/news/technology",
+          "theguardian.com/technology",
+          "techcrunch.com",
+          "theverge.com",
+          "wired.com"
+        ]
+      },
+      {
+        "iab_code": "706",
+        "iab_description": "Television",
+        "sites": [
+          "bbc.com/news/entertainment-arts",
+          "theguardian.com/tv-and-radio",
+          "radiotimes.com",
+          "digitalspy.com",
+          "denofgeek.com"
+        ]
+      },
+      {
+        "iab_code": "719",
+        "iab_description": "Travel",
+        "sites": [
+          "lonelyplanet.com",
+          "theguardian.com/travel",
+          "cntraveler.com",
+          "Timeout.com",
+          "nationalgeographic.com/travel"
+        ]
+      },
+      {
+        "iab_code": "733",
+        "iab_description": "Video Gaming",
+        "sites": [
+          "eurogamer.net",
+          "polygon.com",
+          "ign.com",
+          "kotaku.com",
+          "pcgamer.com"
+        ]
+      }
+    ],
+    "blocked_domains": [
+      "marketscreener.com",
+      "fr.marketscreener.com",
+      "en.marketscreener.com",
+      "wsj.com",
+      "ft.com",
+      "bloomberg.com"
+    ]
+  }

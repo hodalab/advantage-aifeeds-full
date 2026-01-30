@@ -1,0 +1,23 @@
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "adv-ai-feeds"
+region = "eu-west-1"
+capabilities = "CAPABILITY_IAM"
+resolve_s3 = true
+confirm_changeset = false
+fail_on_empty_changeset = false
+
+parameter_overrides = [
+  "Stage=prod",
+  "LogRetentionInDays=14",
+  "LambdaTimeout=600",
+  "LambdaMemorySize=512",
+  "owner=intentio",
+  "env=prod",
+  "prefix=adv",
+  "application=adv-ai-feeds",
+  "component=adv-ai-feeds",
+  "version=1.0.0",
+  "S3Destination=advantage-feeds/feeds"
+]
