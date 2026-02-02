@@ -11,7 +11,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 
-def process_cluster(cluster_id, max_results, geo, locale, s3_destination):
+def process_cluster(cluster_id, max_results, geo, locale, s3_destination,model):
     """
     Generates feed for a single cluster and uploads to S3 if configured.
     Returns the generated feed (list) or raises an exception.
@@ -22,7 +22,8 @@ def process_cluster(cluster_id, max_results, geo, locale, s3_destination):
         cluster_id=int(cluster_id),
         max_results=int(max_results),
         geo=geo,
-        locale=locale
+        locale=locale,
+        model=model
     )
 
     if s3_destination and feed:
@@ -108,6 +109,7 @@ def handler(event, context):
     max_results = body.get("max_results", 10)
     geo = body.get("geo","IT")
     locale = body.get("locale","IT")
+    model = body.get("model")
     
     s3_destination = os.environ.get("S3_DESTINATION")
 
@@ -116,7 +118,7 @@ def handler(event, context):
     # 4. Processing
     try:
         # Single cluster processing
-        feed = process_cluster(cluster_id, max_results, geo, locale, s3_destination)
+        feed = process_cluster(cluster_id, max_results, geo, locale, s3_destination,model)
         
         return {
             "statusCode": 200,

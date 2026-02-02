@@ -13,6 +13,7 @@ def handler(event, context):
     clusters = payload.get("clusters", [])
     locales = payload.get("locales", []) # possible values it,en,es,fr
     max_results = payload.get("max_results", 10)
+    model = payload.get("model", None)
     logger.info("Triggering NewsSearchFunction for clusters: %s, locales: %s, max_results: %s, lambda: %s", clusters, locales, max_results, TARGET_FUNCTION)
 
     if not clusters or not locales:
@@ -31,15 +32,19 @@ def handler(event, context):
 
     for cluster_id in clusters:
         for locale in locales:
-            lambda_client.invoke(
-                FunctionName=TARGET_FUNCTION,
-                InvocationType="Event",  # async
-                Payload=json.dumps({
+            body: dict[str, str] ={
                     "cluster_id": cluster_id,
                     "geo": locale,
                     "locale": locale,
                     "max_results": max_results
-                })
+                }
+            if model:
+                body["model"] = model
+            logger.info("Invoking lambda for cluster %s, locale %s, body %s", cluster_id, locale, body)
+            lambda_client.invoke(
+                FunctionName=TARGET_FUNCTION,
+                InvocationType="Event",  # async
+                Payload = json.dumps(body).encode("utf-8"),
             )
 
     return {

@@ -100,7 +100,7 @@ def handler(event, context):
 
     or_client = OpenRouterClient(
         api_key=api_key,
-        x_title="advantage-bai-feed-summary",
+        x_title="advantage-ai-feed-summary",
     )
 
 
@@ -140,6 +140,12 @@ def handler(event, context):
     cluster_id = json_body["cluster_id"]
     language = json_body.get("language",DEFAULT_LANG)
     llm =json_body.get("model",MODEL_ID)
+
+    
+    logger.info("Received model %s",json_body.get("model"))
+    if llm == "null" or llm == "" or llm.lower() == "none":
+        llm = MODEL_ID
+    logger.info("Using model %s",llm)
     try:
         contents = json_body["contents"]
     except Exception as e:

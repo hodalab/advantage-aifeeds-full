@@ -870,9 +870,11 @@ def search_news(iab_code, iab_description, max_results=10, geo=None, locale=None
     import os
     from openrouter_client import OpenRouterClient
     api_key = os.getenv("OPENROUTER_API_KEY")
+    if api_key is None:
+        raise RuntimeError("OR KEY not found")
     or_client = OpenRouterClient(
         api_key=api_key,
-        x_title="advantage-bai-feed-summary",
+        x_title="adv-ai-news-feed",
     )
     response = or_client.chat_completions(
             model="perplexity/sonar",
@@ -931,7 +933,7 @@ def search_news(iab_code, iab_description, max_results=10, geo=None, locale=None
 # MAIN PIPELINE
 # =============================================================================
 
-def generate_feed(cluster_id, max_results=10, geo=None, locale=None, upto_step=None, min_len_multi=1000, min_len_single=1000):
+def generate_feed(cluster_id, max_results=10, geo=None, locale=None, upto_step=None, min_len_multi=1000, min_len_single=1000, model=None):
     """
     Generates a news feed using the new aggregation strategy:
     1. Search for pages across all categories in the cluster
@@ -1203,7 +1205,7 @@ def generate_feed(cluster_id, max_results=10, geo=None, locale=None, upto_step=N
             validated_articles.append(article)
 
         if validated_articles:
-            summary_response = call_feed_summary_api(validated_articles, cluster_id, locale=locale)
+            summary_response = call_feed_summary_api(validated_articles, cluster_id, locale=locale, model= model)
             if summary_response:
                 feed_item = {
                     "title": summary_response.get("title", ""),
@@ -1294,7 +1296,7 @@ def generate_feed(cluster_id, max_results=10, geo=None, locale=None, upto_step=N
             if validated_articles:
                 # IMPORTANT: Only generate summary if we have at least 1 valid article, 
                 # but the goal is to have more if fuzzy matching worked.
-                summary_response = call_feed_summary_api(validated_articles, cluster_id, locale=locale)
+                summary_response = call_feed_summary_api(validated_articles, cluster_id, locale=locale, model=model)
                 if summary_response:
                     feed_item = {
                         "title": summary_response.get("title", ""),
@@ -1371,7 +1373,16 @@ if __name__ == "__main__":
                 DEBUG_MODE = True
             except ValueError:
                 print(f"⚠️ Invalid -UPTO flag '{arg}', ignoring")
-    
+        # Check for -UPTO flag
+    SUMMARY_MODEL = None
+    for arg in args[:]:
+        if arg.startswith("--model"):
+            try:
+                idx = args.index(arg)
+                SUMMARY_MODEL  = args[idx+1].lower()
+                args.remove(args[idx+1])
+            except ValueError:
+                print(f"⚠️ Invalid --model flag '{arg}', ignoring")
     # Check required arguments
     if len(args) < 1:
         print("\n❌ Missing CLUSTER_ID")
@@ -1380,6 +1391,7 @@ if __name__ == "__main__":
         print("Example with debug: python3 news-search.py 5 10 -debug")
         sys.exit(1)
 
+    print("🚀 Starting News Feed Generation Pipeline, summary model:",SUMMARY_MODEL)
     CLUSTER_ID = args[0]
     
     # Article length validation constants
@@ -1407,7 +1419,8 @@ if __name__ == "__main__":
         locale=LOCALE,
         upto_step=UPTO_STEP,
         min_len_multi=MIN_LEN_MULTI,
-        min_len_single=MIN_LEN_SINGLE
+        min_len_single=MIN_LEN_SINGLE,
+        model=SUMMARY_MODEL
     )
 
     # Save to file only if not using -UPTO

@@ -312,7 +312,7 @@ def fetch_article_content(url):
         print(f"   ⚠️ Error fetching {url[:50]}: {e}")
     return article
 
-def call_feed_summary_api(articles, cluster_id, locale="IT"):
+def call_feed_summary_api(articles, cluster_id, locale="IT",model=None):
     """Calls the feedSummary API to generate a summary."""
     try:
         contents = [{"id": i, "content": a.get('content', ''), "source": a.get('source_domain', '')} 
@@ -320,8 +320,10 @@ def call_feed_summary_api(articles, cluster_id, locale="IT"):
         payload = {
             "cluster_id": cluster_id, 
             "language": locale.lower(),
-            "contents": contents
+            "contents": contents,
         }
+        if model:
+            payload["model"] = model
         response = requests.post(FEED_SUMMARY_API_URL, json=payload, timeout=30)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
