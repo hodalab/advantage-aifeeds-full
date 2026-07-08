@@ -25,6 +25,11 @@ Parameters:
     Type: String
     Description: S3 destination for saving new feeds (bucket or bucket/path)
 
+  SonarMaxTokens:
+    Type: Number
+    Default: 1500
+    Description: Max completion tokens per Perplexity Sonar search call (cost cap)
+
 
 
   owner:
@@ -201,6 +206,8 @@ Resources:
           SECRET_NAME: !Sub "${AWS::StackName}-secrets"
           FEED_SUMMARY_FUNCTION: !Ref FeedSummaryFunction
           S3_DESTINATION: !Sub "s3://${S3Destination}"
+          # Cap on Perplexity Sonar completion tokens per search call.
+          SONAR_MAX_TOKENS: !Ref SonarMaxTokens
       Policies:
         - Statement:
             - Effect: Allow
@@ -252,6 +259,10 @@ Resources:
       Environment:
         Variables:
           TARGET_FUNCTION: !Ref NewsSearchFunction
+          # Locale aliasing: aliased locales reuse the source locale's feed
+          # instead of running their own LLM pipeline. JSON {alias: source}.
+          # Empty object ({}) disables aliasing (compute every locale).
+          LOCALE_ALIASES: '{"fr":"en","es":"en"}'
       Policies:
         - Statement:
             - Effect: Allow

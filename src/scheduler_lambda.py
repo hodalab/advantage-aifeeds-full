@@ -2,6 +2,7 @@ import json
 import os
 import boto3
 import logging
+from locale_config import resolve_source
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -30,27 +31,41 @@ def handler(event, context):
                 "body": json.dumps({"error": "locales must be it,en,es,fr - received: " + locale})
             }   
 
+    # Group the requested locales by the source locale that must actually be
+    # computed. An aliased locale (e.g. FR -> EN via LOCALE_ALIASES) reuses the
+    # source feed instead of triggering its own costly LLM pipeline.
+    groups: dict[str, list[str]] = {}
+    for locale in locales:
+        source = resolve_source(locale)
+        outputs = groups.setdefault(source, [])
+        if locale.lower() not in outputs:
+            outputs.append(locale.lower())
+
+    invoked = 0
     for cluster_id in clusters:
-        for locale in locales:
-            body: dict[str, str] ={
+        for source, output_locales in groups.items():
+            body: dict = {
                     "cluster_id": cluster_id,
-                    "geo": locale,
-                    "locale": locale,
-                    "max_results": max_results
+                    "geo": source,
+                    "locale": source,
+                    "max_results": max_results,
+                    "output_locales": output_locales,
                 }
             if model:
                 body["model"] = model
-            logger.info("Invoking lambda for cluster %s, locale %s, body %s", cluster_id, locale, body)
+            logger.info("Invoking lambda for cluster %s, source locale %s -> outputs %s", cluster_id, source, output_locales)
             lambda_client.invoke(
                 FunctionName=TARGET_FUNCTION,
                 InvocationType="Event",  # async
                 Payload = json.dumps(body).encode("utf-8"),
             )
+            invoked += 1
 
     return {
         "statusCode": 202,
         "body": json.dumps({
-            "invoked": len(clusters) * len(locales)
+            "invoked": invoked,
+            "requested": len(clusters) * len(locales)
         })
     }
 

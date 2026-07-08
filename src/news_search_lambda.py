@@ -11,13 +11,15 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 
-def process_cluster(cluster_id, max_results, geo, locale, s3_destination,model):
+def process_cluster(cluster_id, max_results, geo, locale, s3_destination, model, output_locales=None):
     """
     Generates feed for a single cluster and uploads to S3 if configured.
+    The feed is computed once for `locale` and written under each locale in
+    `output_locales` (defaults to [locale]) so aliased locales reuse it.
     Returns the generated feed (list) or raises an exception.
     """
-    logger.info("params %s %s %s %s %s", cluster_id, max_results, geo, locale, s3_destination)
-    
+    logger.info("params %s %s %s %s %s outputs=%s", cluster_id, max_results, geo, locale, s3_destination, output_locales)
+
     feed, _ = generate_feed(
         cluster_id=int(cluster_id),
         max_results=int(max_results),
@@ -27,36 +29,37 @@ def process_cluster(cluster_id, max_results, geo, locale, s3_destination,model):
     )
 
     if s3_destination and feed:
-        try:
-            output_file = f"feed{cluster_id}_{locale.lower()}.json"
-            # Handle s3:// format or plain bucket name
-            if s3_destination.startswith("s3://"):
-                parsed = urlparse(s3_destination)
-                bucket_name = parsed.netloc
-                # Remove leading slash from path and allow for empty path
-                prefix = parsed.path.lstrip('/')
-                if prefix and not prefix.endswith('/'):
-                        prefix += '/'
-                object_key = f"{prefix}{output_file}"
-            else:
-                bucket_name = s3_destination
-                object_key = output_file
-            
-            logger.info(f"☁️ Uploading {len(feed)} items for cluster {cluster_id} to S3: s3://{bucket_name}/{object_key}")
-            s3_client = boto3.client('s3')
-            json_data = json.dumps(feed, indent=2, ensure_ascii=False)
-            
-            s3_client.put_object(
-                Bucket=bucket_name,
-                Key=object_key,
-                Body=json_data,
-                ContentType='application/json'
-            )
-            logger.info("   ✅ Upload successful")
-        except Exception as e:
-            logger.error(f"   ❌ Error uploading cluster {cluster_id} to S3: {e}")
-            # We log the S3 error but return the feed successfully as the generation worked
-            
+        # Resolve bucket/prefix once, then write one object per output locale.
+        if s3_destination.startswith("s3://"):
+            parsed = urlparse(s3_destination)
+            bucket_name = parsed.netloc
+            # Remove leading slash from path and allow for empty path
+            prefix = parsed.path.lstrip('/')
+            if prefix and not prefix.endswith('/'):
+                    prefix += '/'
+        else:
+            bucket_name = s3_destination
+            prefix = ""
+
+        s3_client = boto3.client('s3')
+        json_data = json.dumps(feed, indent=2, ensure_ascii=False)
+
+        targets = output_locales or [locale]
+        for target in targets:
+            object_key = f"{prefix}feed{cluster_id}_{target.lower()}.json"
+            try:
+                logger.info(f"☁️ Uploading {len(feed)} items for cluster {cluster_id} to S3: s3://{bucket_name}/{object_key}")
+                s3_client.put_object(
+                    Bucket=bucket_name,
+                    Key=object_key,
+                    Body=json_data,
+                    ContentType='application/json'
+                )
+                logger.info("   ✅ Upload successful")
+            except Exception as e:
+                logger.error(f"   ❌ Error uploading cluster {cluster_id} ({target}) to S3: {e}")
+                # We log the S3 error but keep going; generation itself succeeded.
+
     return feed
 
 def handler(event, context):
@@ -110,7 +113,8 @@ def handler(event, context):
     geo = body.get("geo","IT")
     locale = body.get("locale","IT")
     model = body.get("model")
-    
+    output_locales = body.get("output_locales")
+
     s3_destination = os.environ.get("S3_DESTINATION")
 
     logger.info(f"Request parameters - cluster: {cluster_id}, max_results: {max_results}, geo: {geo}, locale: {locale}")
@@ -118,7 +122,7 @@ def handler(event, context):
     # 4. Processing
     try:
         # Single cluster processing
-        feed = process_cluster(cluster_id, max_results, geo, locale, s3_destination,model)
+        feed = process_cluster(cluster_id, max_results, geo, locale, s3_destination, model, output_locales)
         
         return {
             "statusCode": 200,

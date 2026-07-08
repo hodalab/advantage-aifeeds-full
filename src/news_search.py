@@ -9,6 +9,13 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 import requests
 
+# Cap on Sonar completion tokens. We only need URLs back, so a low cap keeps
+# cost bounded even if the model turns verbose. Override via env SONAR_MAX_TOKENS.
+try:
+    SONAR_MAX_TOKENS = int(os.getenv("SONAR_MAX_TOKENS", "1500"))
+except (TypeError, ValueError):
+    SONAR_MAX_TOKENS = 1500
+
 # =============================================================================
 # DEBUG LOGGER
 # =============================================================================
@@ -880,6 +887,7 @@ def search_news(iab_code, iab_description, max_results=10, geo=None, locale=None
             model="perplexity/sonar",
             messages=messages,
         temperature=0.1,
+        max_tokens=SONAR_MAX_TOKENS,
         )
     content=response["choices"][0]["message"]["content"]
     print("Sonar from OpenRouter response: ",content)
@@ -933,7 +941,7 @@ def search_news(iab_code, iab_description, max_results=10, geo=None, locale=None
 # MAIN PIPELINE
 # =============================================================================
 
-def generate_feed(cluster_id, max_results=10, geo=None, locale=None, upto_step=None, min_len_multi=1000, min_len_single=1000, model=None):
+def generate_feed(cluster_id, max_results=10, geo=None, locale=None, upto_step=None, min_len_multi=1000, min_len_single=1000, model=None, verbose=False):
     """
     Generates a news feed using the new aggregation strategy:
     1. Search for pages across all categories in the cluster
@@ -1136,13 +1144,26 @@ def generate_feed(cluster_id, max_results=10, geo=None, locale=None, upto_step=N
     cluster_idx = 0
     
     # Stats for validation
-    discard_stats = {"length": 0, "no_date": 0, "old_date": 0}
+    discard_stats = {"length": 0, "no_date": 0, "old_date": 0, "fetch_error": 0}
     discarded_samples = []
 
-    def track_discard(title, domain, reason):
+    def track_discard(article_obj, reason):
+        title = article_obj.get("title", "")
+        domain = article_obj.get("source_domain", "")
         discard_stats[reason] = discard_stats.get(reason, 0) + 1
         if len(discarded_samples) < 3:
             discarded_samples.append({"title": title, "domain": domain, "reason": reason})
+        
+        print(f"       ❌ Discarded '{title[:40]}...' ({domain}) -> Reason: {reason}")
+        if verbose:
+            print(f"          [VERBOSE] URL: {article_obj.get('link', '')}")
+            if reason == "length":
+                content = article_obj.get("content", "")
+                text_len = article_obj.get("content_text_length", len(content))
+                print(f"          [VERBOSE] Text length: {text_len} (Required: {min_len_multi if len(cluster) >= 2 else min_len_single})")
+                print(f"          [VERBOSE] Content snippet: {content[:150]}...\n")
+            elif reason in ("no_date", "old_date"):
+                print(f"          [VERBOSE] Date found: '{article_obj.get('published_date', 'None')}' (Must be fresh: {must_be_fresh})\n")
 
     # Split clusters by size (Fix Punto 2)
     multi_article_clusters = [c for c in clusters if len(c) >= 2]
@@ -1178,6 +1199,9 @@ def generate_feed(cluster_id, max_results=10, geo=None, locale=None, upto_step=N
             if len(validated_articles) >= 5:
                 break
             article = fetch_article_content(item['link'])
+            if article.get('error'):
+                track_discard(article, "fetch_error")
+                continue
             if not article['title']:
                 article['title'] = item['title']
             if not article['content']:
@@ -1185,18 +1209,18 @@ def generate_feed(cluster_id, max_results=10, geo=None, locale=None, upto_step=N
             
             content_length = article.get('content_text_length', len(article.get('content', '')))
             if content_length < min_len_multi: 
-                track_discard(article['title'], article['source_domain'], "length")
+                track_discard(article, "length")
                 continue
                 
             pub_date = article.get('published_date', '')
             if not pub_date: 
-                track_discard(article['title'], article['source_domain'], "no_date")
+                track_discard(article, "no_date")
                 continue
 
             max_days = 0 if must_be_fresh else 10
             date_is_recent, _ = is_date_recent(pub_date, max_days)
             if not date_is_recent: 
-                track_discard(article['title'], article['source_domain'], "old_date")
+                track_discard(article, "old_date")
                 continue
             
             if not first_valid_image and article.get('image') and 'placeholder' not in article['image'].lower():
@@ -1266,6 +1290,9 @@ def generate_feed(cluster_id, max_results=10, geo=None, locale=None, upto_step=N
                 if len(validated_articles) >= 5:
                     break
                 article = fetch_article_content(candidate['link'])
+                if article.get('error'):
+                    track_discard(article, "fetch_error")
+                    continue
                 if not article['title']:
                     article['title'] = candidate['title']
                 if not article['content']:
@@ -1274,18 +1301,18 @@ def generate_feed(cluster_id, max_results=10, geo=None, locale=None, upto_step=N
                 content_length = article.get('content_text_length', len(article.get('content', '')))
                 
                 if content_length < current_min_len:
-                    track_discard(article['title'], article['source_domain'], "length")
+                    track_discard(article, "length")
                     continue
                     
                 pub_date = article.get('published_date', '')
                 if not pub_date: 
-                    track_discard(article['title'], article['source_domain'], "no_date")
+                    track_discard(article, "no_date")
                     continue
 
                 max_days = 0 if must_be_fresh else 10
                 date_is_recent, _ = is_date_recent(pub_date, max_days)
                 if not date_is_recent: 
-                    track_discard(article['title'], article['source_domain'], "old_date")
+                    track_discard(article, "old_date")
                     continue
                 
                 if not first_valid_image and article.get('image') and 'placeholder' not in article['image'].lower():
@@ -1346,6 +1373,11 @@ if __name__ == "__main__":
     DEBUG_MODE = "-debug" in args
     if DEBUG_MODE:
         args.remove("-debug")
+        
+    # Check for --verbose flag
+    VERBOSE_MODE = "--verbose" in args
+    if VERBOSE_MODE:
+        args.remove("--verbose")
     
     # Check for --locale flag
     for arg in args[:]:
@@ -1386,9 +1418,9 @@ if __name__ == "__main__":
     # Check required arguments
     if len(args) < 1:
         print("\n❌ Missing CLUSTER_ID")
-        print("Usage: python3 news-search.py <CLUSTER_ID> [MAX_RESULTS] [--locale IT|EN|FR|ES] [-debug] [-UPTO<1-3>]")
+        print("Usage: python3 news-search.py <CLUSTER_ID> [MAX_RESULTS] [--locale IT|EN|FR|ES] [-debug] [--verbose] [-UPTO<1-3>]")
         print("Example: python3 news-search.py 5 10 --locale FR -UPTO2")
-        print("Example with debug: python3 news-search.py 5 10 -debug")
+        print("Example with verbose log: python3 news-search.py 5 10 --verbose")
         sys.exit(1)
 
     print("🚀 Starting News Feed Generation Pipeline, summary model:",SUMMARY_MODEL)
@@ -1420,7 +1452,8 @@ if __name__ == "__main__":
         upto_step=UPTO_STEP,
         min_len_multi=MIN_LEN_MULTI,
         min_len_single=MIN_LEN_SINGLE,
-        model=SUMMARY_MODEL
+        model=SUMMARY_MODEL,
+        verbose=VERBOSE_MODE
     )
 
     # Save to file only if not using -UPTO
